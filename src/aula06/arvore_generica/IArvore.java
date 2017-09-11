@@ -1,6 +1,6 @@
 // Agradeço a DEUS pelo dom do conhecimento
 
-package aula06;
+package aula06.arvore_generica;
 
 /**
  *
@@ -28,4 +28,8 @@ public interface IArvore
     
     // Método de atualização
     public Object replace(No no, No obj);
+    
+    // Complementos dos Métodos de atualização
+    public void addChild(No position, No no);
+    public No dropChild(No no);
 }

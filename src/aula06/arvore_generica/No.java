@@ -1,6 +1,6 @@
 // Agradeço a DEUS pelo dom do conhecimento
 
-package aula06;
+package aula06.arvore_generica;
 
 /**
  *

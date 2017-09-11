@@ -1,22 +1,25 @@
 // Agradeço a DEUS pelo dom do conhecimento
 
-package aula06;
+package aula06.arvore_generica;
 
 /**
  *
  * @author papejajr
  */
-public class Arvore implements IArvore
+public class Arvore extends Travessia implements IArvore
 {
-
+    protected No root;
+    protected Integer h; // Number maxim node in level tree
+    
     @Override
     public Integer size() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return h;
     }
     
     // Altura em O(n)
     @Override
-    public Integer height(No no) {
+    public Integer height(No no)
+    {
         if (isInternal(no))
         {
             return 0;
@@ -47,8 +50,9 @@ public class Arvore implements IArvore
     }
     
     @Override
-    public boolean isEmpty() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public boolean isEmpty()
+    {
+        return root == null;
     }
 
     @Override
@@ -62,13 +66,14 @@ public class Arvore implements IArvore
     }
 
     @Override
-    public No root() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public No root()
+    {
+        return root;
     }
 
     @Override
     public No parent(No no) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return no.getPai();
     }
 
     @Override
@@ -77,18 +82,21 @@ public class Arvore implements IArvore
     }
 
     @Override
-    public boolean isInternal(No no) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public boolean isInternal(No no)
+    {
+        return !isExternal(no);
     }
 
     @Override
-    public boolean isExternal(No no) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public boolean isExternal(No no)
+    {
+        return no.getFilhoEsquerdo() == null && no.getFilhoDireito() == null;
     }
 
     @Override
-    public boolean isRoot(No no) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public boolean isRoot(No no)
+    {
+        return no.equals(root);
     }
 
     @Override
@@ -101,7 +109,19 @@ public class Arvore implements IArvore
     }
 
     @Override
-    public Object replace(No no, No obj) {
+    public Object replace(No no, No obj)
+    {
+        no.setElement(obj);
+        return no;
+    }
+
+    @Override
+    public void addChild(No position, No no) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public No dropChild(No no) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
