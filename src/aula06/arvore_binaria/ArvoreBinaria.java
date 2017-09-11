@@ -46,20 +46,22 @@ class ArvoreBinaria extends Arvore implements IArvoreBinaria
             if ((int) position.getElement() > (int) no.getElement())
             {
                 //System.out.println("Esquerdo");
-                System.out.println("Pi: " + position.getElement());
-                System.out.println("N: " + no.getElement());
+                //System.out.print("Pi: " + position.getElement() + "\t");
+                //System.out.print("N: " + no.getElement() + "\t");
                 //System.out.println("isCL: " + hasLeft(position));
                 if (hasLeft(position))
                 {
-                    //System.out.println("IP: " + position.getElement());
-                    //System.out.println("ILP: " + leftChild(position).getElement());
                     position = leftChild(position);
                     addChild(position, no);
                 }
-                position.setFilhoEsquerdo(no);
-                no.setPai(position);
-                System.out.println("Pf: " + position.getElement() + " => " + position.getFilhoEsquerdo().getElement());
-                System.out.println();
+                else
+                {
+                    position.setFilhoEsquerdo(no);
+                    no.setPai(position);
+                    System.out.println("Pf: " + position.getElement() + " => " + position.getFilhoEsquerdo().getElement());
+                    //System.out.println();
+                }
+                
             }
             else
             {
@@ -67,12 +69,16 @@ class ArvoreBinaria extends Arvore implements IArvoreBinaria
                 //System.out.println("P: " + position.getElement());
                 //System.out.println("N: " + no.getElement());
                 //System.out.println("isCL: " + hasright(position));
-                
                 if (hasright(position))
+                {
+                    position = leftChild(position);
                     addChild(rightChild(position), no);
-        
-                position.setFilhoDireito(no);
-                no.setPai(position);
+                }
+                else
+                {
+                    position.setFilhoDireito(no);
+                    no.setPai(position);
+                }
             } 
         }
         

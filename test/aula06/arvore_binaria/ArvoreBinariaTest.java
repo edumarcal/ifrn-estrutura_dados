@@ -138,7 +138,7 @@ public class ArvoreBinariaTest
         assertEquals(no2, ab.leftChild(no1));
         
         System.out.println("PreOrder");
-        ab.preOrder(noRoot);
+        ab.posOrder(noRoot);
         
         //System.out.println("InOrder");
         //ab.inOrder(noRoot);
