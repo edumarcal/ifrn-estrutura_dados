@@ -14,4 +14,8 @@ interface IArvoreBinaria
     public No rightChild(No no);
     public boolean hasLeft(No no);
     public boolean hasright(No no);
+    
+     // Complementos dos Métodos de atualização
+    public void addChild(No position, No no);
+    public No dropChild(No no);
 }

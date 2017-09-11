@@ -9,7 +9,7 @@ package aula06.arvore_generica;
 public class Arvore extends Travessia implements IArvore
 {
     protected No root;
-    protected Integer h; // Number maxim node in level tree
+    protected static Integer h; // Number maxim node in level tree
     
     @Override
     public Integer size() {
@@ -113,16 +113,5 @@ public class Arvore extends Travessia implements IArvore
     {
         no.setElement(obj);
         return no;
-    }
-
-    @Override
-    public void addChild(No position, No no) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public No dropChild(No no) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-    
+    }    
 }

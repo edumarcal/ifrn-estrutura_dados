@@ -8,14 +8,15 @@ package aula06.arvore_generica;
  */
 public class Travessia implements ITravessia
 {
-
+    int i = 0;
+     
     @Override
-    public void preOrder(No no) {
+    public void preOrder(No no) {        
         if (no != null)
         {
             visit(no);
             preOrder(no.getFilhoEsquerdo());
-            preOrder(no.getFilhoEsquerdo());
+            preOrder(no.getFilhoDireito());
         }
     }
     

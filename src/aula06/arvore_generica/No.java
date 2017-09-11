@@ -42,4 +42,11 @@ public class No
     public void setFilhoDireito(No filhoDireito) {
         this.filhoDireito = filhoDireito;
     }
+/*
+    @Override
+    public String toString() {
+        return element.toString();
+    }
+  */  
+    
 }

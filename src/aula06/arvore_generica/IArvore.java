@@ -30,6 +30,6 @@ public interface IArvore
     public Object replace(No no, No obj);
     
     // Complementos dos Métodos de atualização
-    public void addChild(No position, No no);
-    public No dropChild(No no);
+    //public void addChild(No position, No no);
+    //public No dropChild(No no);
 }
