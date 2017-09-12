@@ -11,7 +11,7 @@ import static org.junit.Assert.*;
  */
 public class ArvoreBinariaTest
 {
-/*    
+/*
     @Test
     public void addNoRootArvoreBinaria()
     {
@@ -108,45 +108,171 @@ public class ArvoreBinariaTest
         assertNotEquals(noRight, ab.leftChild(noRoot));
     }
     
- */
      @Test
-    public void addNosArvoreBinaria()
+    public void addNosLeftArvoreBinaria()
     {
         ArvoreBinaria ab = new ArvoreBinaria();
         
-        //System.out.println("Add 10");
         No noRoot = new No();
         noRoot.setElement(10);
         ab.addChild(null, noRoot); //Add Child 1
         
-        //System.out.println("Add 9");
         No no0 = new No();
         no0.setElement(9);
         ab.addChild(noRoot, no0); //Add Child 2
         assertEquals(no0, ab.leftChild(noRoot));
         
-        //System.out.println("Add 2");
         No no1 = new No();
         no1.setElement(2);
         ab.addChild(noRoot, no1); //Add Child 3
         assertEquals(no1, ab.leftChild(no0));
         
-        //System.out.println("Add 1");
         No no2 = new No();
         no2.setElement(1);
         ab.addChild(noRoot, no2); //Add Child 4
         assertEquals(no2, ab.leftChild(no1));
         
-        System.out.println("PreOrder");
-        ab.posOrder(noRoot);
+        //System.out.println("PreOrder");
+        //ab.posOrder(noRoot);
         
         //System.out.println("InOrder");
         //ab.inOrder(noRoot);
         
         //System.out.println("PosOrder");
         //ab.posOrder(noRoot);
+                
+        assertEquals(new Integer(4), ab.size());
+        
+    }
+    
+    public void addNosRightArvoreBinaria()
+    {
+        ArvoreBinaria ab = new ArvoreBinaria();
+        
+        No noRoot = new No();
+        noRoot.setElement(1);
+        ab.addChild(null, noRoot); //Add Child 1
+        
+        No no0 = new No();
+        no0.setElement(2);
+        ab.addChild(noRoot, no0); //Add Child 2
+        assertEquals(no0, ab.rightChild(noRoot));
+        
+        No no1 = new No();
+        no1.setElement(3);
+        ab.addChild(noRoot, no1); //Add Child 3
+        assertEquals(no1, ab.rightChild(no0));
+                
+        assertEquals(new Integer(3), ab.size());
+        
+    }
+
+    @Test
+    public void addNosArvoreBinaria()
+    {
+        ArvoreBinaria ab = new ArvoreBinaria();
+        
+        No noRoot = new No();
+        noRoot.setElement(10);
+        ab.addChild(null, noRoot); //Add Child 1
+        
+        No no0 = new No();
+        no0.setElement(8);
+        ab.addChild(noRoot, no0); //Add Child 2
+        assertEquals(no0, ab.leftChild(noRoot));
+        
+        No no1 = new No();
+        no1.setElement(12);
+        ab.addChild(noRoot, no1); //Add Child 3
+        assertEquals(no1, ab.rightChild(noRoot));
+
+        No no2 = new No();
+        no2.setElement(9);
+        ab.addChild(noRoot, no2); //Add Child 4
+        assertEquals(no2, ab.rightChild(no0));
+
+        No no3 = new No();
+        no3.setElement(7);
+        ab.addChild(noRoot, no3); //Add Child 5
+        assertEquals(no3, ab.leftChild(no0));
+        
+        No no4 = new No();
+        no4.setElement(11);
+        ab.addChild(noRoot, no4); //Add Child 6
+        assertEquals(no4, ab.leftChild(no1));
+        
+        No no5 = new No();
+        no5.setElement(13);
+        ab.addChild(noRoot, no5); //Add Child 7
+        assertEquals(no5, ab.rightChild(no1));
+        
+        //ab.inOrder(noRoot);
         
         assertEquals(new Integer(7), ab.size());
         
     }
+    
+    @Test
+    public void testDropNodeCase1()
+    {
+        ArvoreBinaria ab = new ArvoreBinaria();
+        No noRoot = new No();
+        noRoot.setElement(10);
+        ab.addChild(null, noRoot); //Add Child 1
+        
+        No no0 = new No();
+        no0.setElement(8);
+        ab.addChild(noRoot, no0); //Add Child 2
+        assertEquals(no0, ab.leftChild(noRoot));
+        
+        assertEquals(no0, ab.dropChild(no0));
+        assertEquals(new Integer(1), ab.size());
+    }
+*/
+    @Test
+    public void testDropNodeCase2Left()
+    {
+        ArvoreBinaria ab = new ArvoreBinaria();
+        No noRoot = new No();
+        noRoot.setElement(10);
+        ab.addChild(null, noRoot); //Add Child 1
+        
+        No no0 = new No();
+        no0.setElement(8);
+        ab.addChild(noRoot, no0); //Add Child 2
+        assertEquals(no0, ab.leftChild(noRoot));
+        
+        No no1 = new No();
+        no1.setElement(9);
+        ab.addChild(noRoot, no1); //Add Child 3
+               
+        assertEquals(no0, ab.dropChild(no0)); // Drop Child (8)
+        assertEquals(new Integer(2), ab.size());
+        ab.inOrder(noRoot);
+        System.out.println("###########################################");
+    }
+    
+    @Test
+    public void testDropNodeCase2Right()
+    {
+        ArvoreBinaria ab = new ArvoreBinaria();
+        No noRoot = new No();
+        noRoot.setElement(10);
+        ab.addChild(null, noRoot); //Add Child 1
+        
+        No no0 = new No();
+        no0.setElement(11);
+        ab.addChild(noRoot, no0); //Add Child 2
+        assertEquals(no0, ab.rightChild(noRoot));
+        
+        No no1 = new No();
+        no1.setElement(12);
+        ab.addChild(noRoot, no1); //Add Child 3
+        assertEquals(no1, ab.rightChild(no0));
+               
+        assertEquals(no0, ab.dropChild(no0)); // Drop Child (11)
+        assertEquals(new Integer(2), ab.size());
+        ab.inOrder(noRoot);
+    }
 }
+

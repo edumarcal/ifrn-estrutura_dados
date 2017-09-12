@@ -9,11 +9,19 @@ package aula06.arvore_generica;
 public class Arvore extends Travessia implements IArvore
 {
     protected No root;
-    protected static Integer h; // Number maxim node in level tree
+    //protected Integer h; // Number maxim node in level tree
     
     @Override
     public Integer size() {
-        return h;
+        return size(root);        
+    }
+    
+    private Integer size(No current)
+    {
+        if (current == null)
+            return 0;
+        else
+            return(size(current.getFilhoEsquerdo()) + 1 + size(current.getFilhoDireito()));
     }
     
     // Altura em O(n)

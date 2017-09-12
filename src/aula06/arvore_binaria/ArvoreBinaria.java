@@ -10,10 +10,7 @@ import aula06.arvore_generica.No;
  * @author papejajr
  */
 class ArvoreBinaria extends Arvore implements IArvoreBinaria
-{
-
-    private Integer h = 0;
-    
+{    
     @Override
     public No leftChild(No no) {
         return no.getFilhoEsquerdo();
@@ -58,8 +55,7 @@ class ArvoreBinaria extends Arvore implements IArvoreBinaria
                 {
                     position.setFilhoEsquerdo(no);
                     no.setPai(position);
-                    System.out.println("Pf: " + position.getElement() + " => " + position.getFilhoEsquerdo().getElement());
-                    //System.out.println();
+                    //System.out.println("Pf: " + position.getElement() + " => " + position.getFilhoEsquerdo().getElement());
                 }
                 
             }
@@ -71,8 +67,8 @@ class ArvoreBinaria extends Arvore implements IArvoreBinaria
                 //System.out.println("isCL: " + hasright(position));
                 if (hasright(position))
                 {
-                    position = leftChild(position);
-                    addChild(rightChild(position), no);
+                    position = rightChild(position);
+                    addChild(position, no);
                 }
                 else
                 {
@@ -81,19 +77,85 @@ class ArvoreBinaria extends Arvore implements IArvoreBinaria
                 }
             } 
         }
-        
-        h++; //incrementa o tamanho de nos da arvore
-        //System.out.println("Size: " + h);
     }
 
     @Override
-    public No dropChild(No no) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public No dropChild(No no)
+    {
+        No noDrop = search(root, no);
+        
+        // 1 caso No Folha
+        if (leftChild(noDrop) == null && rightChild(noDrop) == null)
+        {
+            System.out.println("Caso 1");
+            noDrop.getPai().setFilhoEsquerdo(null);
+            noDrop.getPai().setFilhoDireito(null);
+            noDrop.setPai(null);
+            //noDrop = null;
+        }
+        else
+        {
+            System.err.println(noDrop.getElement());
+            System.err.println("E: " + noDrop.getFilhoEsquerdo());
+            System.err.println("R: " + noDrop.getFilhoDireito().getElement());
+            
+            // 2 Caso excluindo o No que tem um filho
+            if (hasright(noDrop) && !hasLeft(noDrop))
+            {
+                System.out.println("Caso 2L");
+                noDrop.getPai().setFilhoEsquerdo(leftChild(noDrop));
+                noDrop.setFilhoEsquerdo(null);
+                return noDrop;
+            }
+            else if(hasLeft(noDrop) && !hasright(noDrop))
+            {
+                //noDrop.getPai().setFilhoEsquerdo(rightChild(noDrop));
+                noDrop.getPai().setFilhoDireito(rightChild(noDrop));
+                
+                
+                System.out.println("Caso 2R");                
+                return noDrop;
+            }
+            
+            // 3 Caso excluindo No com dois filhos
+            if(hasright(noDrop))
+            {
+                System.out.println("Caso 3L");
+                noDrop.getPai().setFilhoDireito(rightChild(noDrop));
+                return noDrop;
+            }
+            else if (hasLeft(noDrop))
+            {
+                System.out.println("Caso 3R");
+                noDrop.getPai().setFilhoEsquerdo(leftChild(noDrop));
+                return noDrop;
+            }
+                
+        }
+        
+        return noDrop;
     }
     
-    // Corrigir o erro da referencia do objeto herdado (Arvore)
-    @Override
-    public Integer size() {
-        return this.h;
+    private No search(No current, No no)
+    {
+        if (current != null)
+        {
+            if(current.equals(no))
+                return current;
+            
+            if((int)current.getElement() > (int)no.getElement())
+            {
+                current = current.getFilhoEsquerdo();
+                search(current, no);
+            }
+            else
+            {
+                current = current.getFilhoDireito();
+                search(current, no);
+            }
+        }
+ 
+        return current;
     }
+    
 }
