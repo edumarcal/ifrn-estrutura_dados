@@ -11,9 +11,9 @@ import static org.junit.Assert.*;
  */
 public class ArvoreBinariaTest
 {
-/*
+
     @Test
-    public void addNoRootArvoreBinaria()
+    public void testAddNoRootArvoreBinaria()
     {
         ArvoreBinaria ab = new ArvoreBinaria();
         No noRoot = new No();
@@ -25,7 +25,7 @@ public class ArvoreBinariaTest
     }
     
     @Test
-    public void addNoLeftArvoreBinaria()
+    public void testAddNoLeftArvoreBinaria()
     {
         ArvoreBinaria ab = new ArvoreBinaria();
         No noRoot = new No();
@@ -46,7 +46,7 @@ public class ArvoreBinariaTest
     }
     
      @Test
-    public void addNoLeftCompareRightArvoreBinaria()
+    public void testAddNoLeftCompareRightArvoreBinaria()
     {
         ArvoreBinaria ab = new ArvoreBinaria();
         No noRoot = new No();
@@ -67,7 +67,7 @@ public class ArvoreBinariaTest
     }
     
     @Test
-    public void addNoRightArvoreBinaria()
+    public void testAddNoRightArvoreBinaria()
     {
         ArvoreBinaria ab = new ArvoreBinaria();
         No noRoot = new No();
@@ -88,7 +88,7 @@ public class ArvoreBinariaTest
     }
     
     @Test
-    public void addNoRightCompareLeftArvoreBinaria()
+    public void testAddNoRightCompareLeftArvoreBinaria()
     {
         ArvoreBinaria ab = new ArvoreBinaria();
         No noRoot = new No();
@@ -109,7 +109,7 @@ public class ArvoreBinariaTest
     }
     
      @Test
-    public void addNosLeftArvoreBinaria()
+    public void testAddNosLeftArvoreBinaria()
     {
         ArvoreBinaria ab = new ArvoreBinaria();
         
@@ -145,7 +145,7 @@ public class ArvoreBinariaTest
         
     }
     
-    public void addNosRightArvoreBinaria()
+    public void testAddNosRightArvoreBinaria()
     {
         ArvoreBinaria ab = new ArvoreBinaria();
         
@@ -168,7 +168,7 @@ public class ArvoreBinariaTest
     }
 
     @Test
-    public void addNosArvoreBinaria()
+    public void testAddNosArvoreBinaria()
     {
         ArvoreBinaria ab = new ArvoreBinaria();
         
@@ -209,7 +209,6 @@ public class ArvoreBinariaTest
         //ab.inOrder(noRoot);
         
         assertEquals(new Integer(7), ab.size());
-        
     }
     
     @Test
@@ -228,7 +227,7 @@ public class ArvoreBinariaTest
         assertEquals(no0, ab.dropChild(no0));
         assertEquals(new Integer(1), ab.size());
     }
-*/
+
     @Test
     public void testDropNodeCase2Left()
     {
@@ -243,13 +242,12 @@ public class ArvoreBinariaTest
         assertEquals(no0, ab.leftChild(noRoot));
         
         No no1 = new No();
-        no1.setElement(9);
+        no1.setElement(7);
         ab.addChild(noRoot, no1); //Add Child 3
                
         assertEquals(no0, ab.dropChild(no0)); // Drop Child (8)
         assertEquals(new Integer(2), ab.size());
-        ab.inOrder(noRoot);
-        System.out.println("###########################################");
+        //ab.inOrder(noRoot);
     }
     
     @Test
@@ -272,7 +270,40 @@ public class ArvoreBinariaTest
                
         assertEquals(no0, ab.dropChild(no0)); // Drop Child (11)
         assertEquals(new Integer(2), ab.size());
-        ab.inOrder(noRoot);
+        //ab.inOrder(noRoot);
     }
+
+    @Test
+    public void testDropNodeCase3()
+    {
+        ArvoreBinaria ab = new ArvoreBinaria();
+
+        No noRoot = new No(10);
+        ab.addChild(null, noRoot); //Add Child 1
+        
+        No no0 = new No(8);
+        ab.addChild(noRoot, no0); //Add Child 2
+        assertEquals(no0, ab.leftChild(noRoot));
+        
+        No no1 = new No();
+        no1.setElement(12);
+        ab.addChild(noRoot, no1); //Add Child 3
+        assertEquals(no1, ab.rightChild(noRoot));
+        
+        ab.addChild(noRoot, new No(11)); //Add Child 4
+        ab.addChild(noRoot, new No(9)); //Add Child 5
+        ab.addChild(noRoot, new No(7)); //Add Child 6
+        ab.addChild(noRoot, new No(13)); //Add Child 7
+
+        assertEquals(no0, ab.dropChild(no0));       
+        assertEquals(no1, ab.dropChild(no1));
+        
+        //System.out.println("-----------------------------------------------------");
+        //ab.inOrder(noRoot);
+        //System.out.println("-----------------------------------------------------");
+        
+        assertEquals(new Integer(5), ab.size());
+    }
+
 }
 

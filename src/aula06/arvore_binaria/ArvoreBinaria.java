@@ -87,50 +87,51 @@ class ArvoreBinaria extends Arvore implements IArvoreBinaria
         // 1 caso No Folha
         if (leftChild(noDrop) == null && rightChild(noDrop) == null)
         {
-            System.out.println("Caso 1");
+            //System.out.println("Caso 1");
             noDrop.getPai().setFilhoEsquerdo(null);
             noDrop.getPai().setFilhoDireito(null);
             noDrop.setPai(null);
-            //noDrop = null;
         }
         else
         {
-            System.err.println(noDrop.getElement());
-            System.err.println("E: " + noDrop.getFilhoEsquerdo());
-            System.err.println("R: " + noDrop.getFilhoDireito().getElement());
-            
+            //System.out.println(hasright(noDrop) && !hasLeft(noDrop));
             // 2 Caso excluindo o No que tem um filho
             if (hasright(noDrop) && !hasLeft(noDrop))
             {
-                System.out.println("Caso 2L");
-                noDrop.getPai().setFilhoEsquerdo(leftChild(noDrop));
-                noDrop.setFilhoEsquerdo(null);
+                //System.out.println("Caso 2R");
+                noDrop.getPai().setFilhoDireito(rightChild(noDrop));
+                noDrop.setFilhoDireito(null);
                 return noDrop;
             }
             else if(hasLeft(noDrop) && !hasright(noDrop))
             {
-                //noDrop.getPai().setFilhoEsquerdo(rightChild(noDrop));
-                noDrop.getPai().setFilhoDireito(rightChild(noDrop));
-                
-                
-                System.out.println("Caso 2R");                
-                return noDrop;
-            }
-            
-            // 3 Caso excluindo No com dois filhos
-            if(hasright(noDrop))
-            {
-                System.out.println("Caso 3L");
-                noDrop.getPai().setFilhoDireito(rightChild(noDrop));
-                return noDrop;
-            }
-            else if (hasLeft(noDrop))
-            {
-                System.out.println("Caso 3R");
+                //System.out.println("Caso 2L");                
                 noDrop.getPai().setFilhoEsquerdo(leftChild(noDrop));
+                noDrop.setFilhoEsquerdo(null);             
                 return noDrop;
             }
+            // 3 Caso excluindo No com dois filhos
+            else
+            {
+                if((int)noDrop.getElement() < (int)root.getElement())
+                {
+                    //System.out.print("Caso 3L\t");
+                    noDrop.getPai().setFilhoEsquerdo(rightChild(noDrop));
+                }
+                else
+                {
+                    //System.out.print("Caso 3R\t");
+                    noDrop.getPai().setFilhoDireito(rightChild(noDrop));
+                }
                 
+                rightChild(noDrop).setPai(noDrop.getPai());
+                rightChild(noDrop).setFilhoEsquerdo(leftChild(noDrop));
+                leftChild(noDrop).setPai(rightChild(noDrop));
+
+                noDrop.setPai(null);
+                
+                return noDrop;
+            }  
         }
         
         return noDrop;
@@ -140,6 +141,7 @@ class ArvoreBinaria extends Arvore implements IArvoreBinaria
     {
         if (current != null)
         {
+            //System.out.println("SC => " + current.getElement());
             if(current.equals(no))
                 return current;
             
@@ -154,7 +156,8 @@ class ArvoreBinaria extends Arvore implements IArvoreBinaria
                 search(current, no);
             }
         }
- 
+        //if(current != null) System.out.println("SCR => " + current.getElement());
+        
         return current;
     }
     

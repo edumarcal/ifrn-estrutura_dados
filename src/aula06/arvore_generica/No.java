@@ -11,6 +11,14 @@ public class No
     private Object element;
     private No pai, filhoEsquerdo, filhoDireito;
 
+    public No() {
+    }
+
+    public No(Object element) {
+        this.element = element;
+    }
+
+    
     public Object getElement() {
         return element;
     }
