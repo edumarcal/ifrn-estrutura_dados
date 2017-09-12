@@ -8,7 +8,7 @@ import aula06.arvore_generica.No;
  *
  * @author papejajr
  */
-interface IArvoreBinaria
+public interface IArvoreBinaria
 {
     public No leftChild(No no);
     public No rightChild(No no);

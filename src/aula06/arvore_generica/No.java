@@ -8,8 +8,9 @@ package aula06.arvore_generica;
  */
 public class No
 {
-    private Object element;
-    private No pai, filhoEsquerdo, filhoDireito;
+    protected Object element;
+    protected No pai, filhoEsquerdo, filhoDireito;
+    protected int FB = 0;
 
     public No() {
     }
@@ -50,11 +51,21 @@ public class No
     public void setFilhoDireito(No filhoDireito) {
         this.filhoDireito = filhoDireito;
     }
+
+    public void setFB(int FB) {
+        this.FB = FB;
+    }
+    
+    
 /*
     @Override
     public String toString() {
         return element.toString();
     }
   */  
+
+    public int getFB() {
+        return FB;
+    }
     
 }
