@@ -22,7 +22,15 @@ public class Arvore extends Travessia implements IArvore
             return 0;
         else
             return(size(current.getFilhoEsquerdo()) + 1 + size(current.getFilhoDireito()));
+    }  
+    
+    public Integer height0(No no)
+    {
+        if (root == null || no == null)
+            return 0;
+	return (1 + Math.max(height0(no.getFilhoEsquerdo()), height0(no.getFilhoDireito())));
     }
+    
     
     // Altura em O(n)
     @Override

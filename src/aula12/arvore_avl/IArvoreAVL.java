@@ -8,10 +8,17 @@ import aula06.arvore_generica.No;
  *
  * @author papejajr
  */
-interface IArvoreAVL {
+interface IArvoreAVL
+{
     public void rotacaoSimplesEsquerda(No no);
     public void rotacaoSimplesDireita(No no);
     public void rotacaoDuplaEsquerda(No no);
     public void rotacaoDuplaDireita(No no);
+    public void atualizarFB(No no); 
+    
+    // Metodos da Arvore Binária de Pesquisa
+    public void insert(No no);
+    public No remove(No no);
+    public No search(No no);
     
 }

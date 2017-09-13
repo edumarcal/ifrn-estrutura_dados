@@ -11,7 +11,7 @@ public class No
     protected Object element;
     protected No pai, filhoEsquerdo, filhoDireito;
     protected int FB = 0;
-
+    
     public No() {
     }
 
@@ -52,20 +52,17 @@ public class No
         this.filhoDireito = filhoDireito;
     }
 
+    public int getFB() {
+        return FB;
+    }
+
     public void setFB(int FB) {
         this.FB = FB;
-    }
-    
-    
+    }    
 /*
     @Override
     public String toString() {
         return element.toString();
     }
-  */  
-
-    public int getFB() {
-        return FB;
-    }
-    
+ */      
 }

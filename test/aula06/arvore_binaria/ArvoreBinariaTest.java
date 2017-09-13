@@ -16,7 +16,7 @@ public class ArvoreBinariaTest
     public void testAddNoRootArvoreBinaria()
     {
         ArvoreBinaria ab = new ArvoreBinaria();
-        No noRoot = new No();
+        No noRoot = new No() {};
         noRoot.setElement(10);
         
         ab.addChild(null, noRoot);
@@ -28,7 +28,7 @@ public class ArvoreBinariaTest
     public void testAddNoLeftArvoreBinaria()
     {
         ArvoreBinaria ab = new ArvoreBinaria();
-        No noRoot = new No();
+        No noRoot = new No() {};
         noRoot.setElement(10);
         
         ab.addChild(null, noRoot);

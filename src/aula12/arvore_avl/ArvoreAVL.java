@@ -13,56 +13,35 @@ public class ArvoreAVL extends BinarySearchTree implements IArvoreAVL
 {
     @Override
     public void rotacaoSimplesEsquerda(No no) {
-        No a = no.getFilhoDireito();
-        a.setPai(no.getPai());
-        if (no.getPai() != null) {
-            if (no.getPai().getFilhoDireito()== no) {
-                no.getPai().setFilhoDireito(a);
-            } else {
-                no.getPai().setFilhoEsquerdo(a);
-            }
+        System.err.println(no.getElement());
+        No y = no.getFilhoDireito();
+        if(y == null)
+        {
+            System.out.println("The tree cannot be left rotated");
+            return;
         }
-        no.setPai(a);
-        if (a.getFilhoEsquerdo()!= null) {
-            a.getFilhoEsquerdo().setPai(no);
-            a.setFilhoEsquerdo(no);
+        no.setFilhoDireito(y.getFilhoEsquerdo());//Turn y's left subtree into x's subtree
+        if (y.getFilhoEsquerdo() != null) {
+            y.getFilhoEsquerdo().setPai(no);
+
+        }
+        y.setPai(no.getPai());
+        if (no.getPai() == null) {
+            root = y;
+        } else if (no == no.getPai().getFilhoEsquerdo()) {
+            no.getPai().setFilhoEsquerdo(y);
         } else {
-            a.setFilhoEsquerdo(no);
-            a.getFilhoEsquerdo().setPai(a);
-            no.setFilhoDireito(null);
-            
+            no.getPai().setFilhoDireito(y);
         }
-        this.root = a;        
-        a.setFB(a.getFB() + 1);
-        a.getFilhoEsquerdo().setFB(a.getFilhoEsquerdo().getFB() + 2);
+        y.setFilhoEsquerdo(no);
+        no.setPai(y);
     }
 
     @Override
-    public void rotacaoSimplesDireita(No no) 
-    {
-        No a = no.getFilhoEsquerdo();
-        a.setPai(no.getPai());
-        if (no.getPai() != null) {
-            if (no.getPai().getFilhoEsquerdo()== no) {
-                no.getPai().setFilhoEsquerdo(a);
-            } else {
-                no.getPai().setFilhoDireito(a);
-            }
-        }
-        no.setPai(a);
-        if (a.getFilhoDireito()!= null) {
-            a.getFilhoDireito().setPai(no);
-            a.setFilhoDireito(no);
-        } else {
-            a.setFilhoDireito(no);
-            a.getFilhoDireito().setPai(a);
-            no.setFilhoEsquerdo(null);
-        }
-        super.root = a;
-        a.setFB(a.getFB() - 1);
-        a.getFilhoDireito().setFB(a.getFilhoDireito().getFB() - 2);
+    public void rotacaoSimplesDireita(No no) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-
+    
     @Override
     public void rotacaoDuplaEsquerda(No no) {
         rotacaoSimplesDireita(no);
@@ -74,82 +53,43 @@ public class ArvoreAVL extends BinarySearchTree implements IArvoreAVL
         rotacaoSimplesEsquerda(no);
         rotacaoSimplesDireita(no);
     }
-    
-    public void atualizaFB(int valor, boolean in)
+       
+    @Override
+    public void atualizarFB(No no)
     {
-        // atualizando FB pelo retorno da busca do nó informado.
-        No no = search(root, root);
-        atualizaFB(no, in);
-    }
-    
-    private void atualizaFB(No no, boolean in){
-        
-        if (in) {
-            if (no.getPai() != null) {
-                //  sub-arvore esquerda
-                if (no.getPai().getFilhoEsquerdo()== no){
-
-                    no.getPai().setFB(no.getPai().getFB() + 1);
-                    atualizaFB(no.getPai(), true);
-
-                    if (no.getPai().getFB() >= 2) {
-                        if (no.getFilhoDireito()!= null) {
-                            if (no.getFilhoDireito().getFB() == -1) {
-                                System.out.println("rotação simples a direita");
-//                                rotacaoDuplaDireita(no.getPai());
-                            }
-                        } else {
-                            System.out.println("rotação simples a direita");
-//                            rotacaoSimplesDireita(no.getPai());
-                        }
-                    }
-                //  sub-arvore direita
-                } else {
-
-                    no.getPai().setFB(no.getPai().getFB() - 1);
-                    atualizaFB(no.getPai(), true);
-                    
-                    if (no.getPai().getFB() <= -2) {
-                        if (no.getFilhoEsquerdo()!= null) {
-                            if (no.getFilhoEsquerdo().getFB() == -1) {
-                                System.out.println("rotação dupla a esquerda");
-//                                rotacaoDuplaEsquerda(no.getPai());
-                            }
-                        } else {
-                            System.out.println("rotação simples a esquerda");
-//                            rotacaoSimplesEsquerda(no.getPai());
-                        }
-                    }
-                }
-            }
-        // remoção
-        } else {
-            if (no.getPai() != null) {
-                if (no.getPai().getFilhoEsquerdo()== no){
-
-                    no.getPai().setFB(no.getPai().getFB() - 1);
-                    atualizaFB(no.getPai(), false);
-                } else {
-
-                    no.getPai().setFB(no.getPai().getFB() + 1);
-                    atualizaFB(no.getPai(), false);
-                }
-            }
+        no.setFB(calcFB(no));
+        if (no.getFB() <= -2)
+        {
+            //System.out.println("Rotação Simples a Esquerda");
+            rotacaoSimplesEsquerda(no);
         }
+        System.out.println("No:" + no.getElement() + "\tFB:" + no.getFB());
+    }
+
+    private int calcFB(No no)
+    {
+        //return height0(no.getFilhoEsquerdo()) - height0(root) + 1;
+        return height0(no.getFilhoEsquerdo()) - height0(no.getFilhoDireito());        
     }
     
     @Override
-    public No remove(No element)
-    {
-        atualizaFB(root, false);
-        return super.remove(element);
+    public void insert(No no) {
+        super.insert(root, no);
+        atualizarFB(no);
     }
 
     @Override
-    public void insert(No position, No element) {
-        super.insert(position, element);
-        atualizaFB((int)element.getElement(), true);
+    public No search(No no) {
+        return super.search(root, no);
     }
-    
-    
+
+    @Override
+    public No remove(No element) {
+        No no = super.remove(element);
+        
+        if (no != null)
+            atualizarFB(no);
+        
+        return no;
+    } 
 }
