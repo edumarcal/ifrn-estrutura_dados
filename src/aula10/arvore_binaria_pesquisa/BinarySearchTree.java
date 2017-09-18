@@ -13,29 +13,21 @@ public class BinarySearchTree extends Arvore implements IBinarySearchTree {
     
     @Override
     public No search(No position, No element) {
-        if (super.root == null)
-        {
+        if (root == null)
             return null;
-        } 
+        else if ((int) element.getElement() < (int) position.getElement())
+            return search(position.getFilhoEsquerdo(), element);
+        else if ((int) element.getElement() > (int) position.getElement())
+            return search(position.getFilhoDireito(), element);
         else
-        {
-            if (key(element) < (int) position.getElement())
-            {
-                return search(position.getFilhoEsquerdo(), element);
-            } else if (key(element) > (int) position.getElement()){
-                return search(position.getFilhoDireito(), element);
-            } else {
-                return position;
-            }
-
-        }
+            return position;
     }
 
     @Override
     public void insert(No position, No element) {
-        if (super.root == null)
+        if (root == null)
         {
-            super.root = element;
+            root = element;
         }
         else
         {
@@ -151,9 +143,4 @@ public class BinarySearchTree extends Arvore implements IBinarySearchTree {
     public boolean hasright(No no) {
         return rightChild(no) != null;
     }    
-
-    public Integer key(No no)
-    {
-        return (Integer) no.getElement();
-    }
 }

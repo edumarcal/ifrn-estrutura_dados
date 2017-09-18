@@ -14,17 +14,51 @@ public class BinarySearchTreeTest
 {
     
     @Test
+    public void insert_0_BST()
+    {
+        BinarySearchTree bst = new BinarySearchTree();
+        No root = new No(1);
+        
+        bst.insert(null, root);
+        //bst.printTree();
+        
+        bst.insert(root, new No(2));
+        //bst.printTree();
+        
+        bst.insert(root, new No(3));
+        bst.printTree();
+        
+        bst.insert(root, new No(4));
+        //bst.printTree();
+        
+        bst.insert(root, new No(5));
+        //bst.printTree();
+        assertEquals(new Integer(5), bst.size());
+     }
+ /*   
+    
+    
+       @Test
     public void insertNodesBST()
     {
         BinarySearchTree bst = new BinarySearchTree();
-        No root = new No(6);
+        No root = new No(1);
         bst.insert(null, root);
+        //bst.printTree();
+        
         bst.insert(root, new No(2));
-        bst.insert(root, new No(9));
-        bst.insert(root, new No(1));
+        //bst.printTree();
+        
+        bst.insert(root, new No(3));
+        //bst.printTree();
+
         bst.insert(root, new No(4));
-        bst.insert(root, new No(8));
-        assertEquals(new Integer(6), bst.size());
+        //bst.printTree();
+        
+        bst.insert(root, new No(5));
+        bst.printTree();
+        
+        assertEquals(new Integer(5), bst.size());
         //bst.inOrder(root);
     }
     
@@ -33,7 +67,7 @@ public class BinarySearchTreeTest
     {
         BinarySearchTree bst = new BinarySearchTree();
         No root = new No(6);
-        bst.insert(null, root);
+        bst.insert(root, root);
         bst.insert(root, new No(2));
         bst.insert(root, new No(9));
         No k = new No(1);
@@ -41,9 +75,9 @@ public class BinarySearchTreeTest
         bst.insert(root, new No(4));
         bst.insert(root, new No(8));
         assertEquals(k, bst.search(root, k));
-        //bst.inOrder(root);
+        bst.inOrder(root);
     }
-    
+ /*   
     @Test
     public void removeNodesBSTCase1Root()
     {
@@ -56,4 +90,5 @@ public class BinarySearchTreeTest
         assertEquals(new Integer(2), bst.size());
         //bst.inOrder(root);
     }
+*/
 }

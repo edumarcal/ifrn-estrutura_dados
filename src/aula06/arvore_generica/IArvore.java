@@ -12,13 +12,13 @@ public interface IArvore
     public Integer size();
     public Integer height(No no);
     public boolean isEmpty();
-    public Iterable elements();
-    public Iterable nos();
+    //public Iterable elements();
+    //public Iterable nos();
     
     // Métodos de acesso
     public No root();
     public No parent(No no);
-    public Iterable children(No no);
+    //public Iterable children(No no);
     
     // Métodos de consulta
     public boolean isInternal(No no);
@@ -32,4 +32,6 @@ public interface IArvore
     // Complementos dos Métodos de atualização
     //public void addChild(No position, No no);
     //public No dropChild(No no);
+    
+    public void printTree();
 }

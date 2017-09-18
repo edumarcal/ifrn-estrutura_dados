@@ -9,7 +9,6 @@ package aula06.arvore_generica;
 public class Arvore extends Travessia implements IArvore
 {
     protected No root;
-    //protected Integer h; // Number maxim node in level tree
     
     @Override
     public Integer size() {
@@ -18,69 +17,25 @@ public class Arvore extends Travessia implements IArvore
     
     private Integer size(No current)
     {
-        if (current == null)
-            return 0;
-        else
-            return(size(current.getFilhoEsquerdo()) + 1 + size(current.getFilhoDireito()));
+        return current == null ?
+                0 :
+                size(current.getFilhoEsquerdo()) + 1 + size(current.getFilhoDireito());
     }  
     
-    public Integer height0(No no)
-    {
-        if (root == null || no == null)
-            return 0;
-	return (1 + Math.max(height0(no.getFilhoEsquerdo()), height0(no.getFilhoDireito())));
-    }
-    
-    
-    // Altura em O(n)
     @Override
     public Integer height(No no)
     {
-        if (isInternal(no))
-        {
-            return 0;
-        }
-        else
-        {
-            int h = 0;
-            for(Object w : children(no))
-            {
-                h = Integer.max(h, height(no));
-            }
-            return 1 + h;
-        }
+        return root == null || no == null ?
+                0 :
+                1 + Math.max(height(no.getFilhoEsquerdo()), height(no.getFilhoDireito()));
     }
-
-    // Altura em O(n^2)
-    public Integer height2(No no)
-    {
-        int h = 0;
-        for (Object w : nos())
-        {
-            if (isExternal((No) w))
-            {
-                h = Integer.max(h, depth((No) w));
-            }
-        }
-        return h;
-    }
-    
+   
     @Override
     public boolean isEmpty()
     {
         return root == null;
     }
-
-    @Override
-    public Iterable elements() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public Iterable nos() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
+    
     @Override
     public No root()
     {
@@ -90,11 +45,6 @@ public class Arvore extends Travessia implements IArvore
     @Override
     public No parent(No no) {
         return no.getPai();
-    }
-
-    @Override
-    public Iterable children(No no) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
@@ -118,10 +68,9 @@ public class Arvore extends Travessia implements IArvore
     @Override
     public Integer depth(No no)
     {
-        if (isRoot(no))
-            return 0;
-        else
-            return 1 + depth(parent(no));
+        return isRoot(no) ?
+                0 :
+                1 + depth(parent(no));
     }
 
     @Override
@@ -130,4 +79,68 @@ public class Arvore extends Travessia implements IArvore
         no.setElement(obj);
         return no;
     }    
+
+    @Override
+    public void printTree()
+    {     
+        int nivel = height(root); // Calcula a quantidade de niveis da arvore
+        int qtdNosPossiveis; // Guarda a quantidade de nos possivel
+        int qtdEspacoInicio; // Guarda o valor que representa a sequencia de impressao do espaco
+        int qtdEspacoEntre = 0; // Guarda o valor que representa a sequencia de impressao do espaco entre os nos
+        int qtdIteracaoEntre; // Guarda o valor que representa
+        String espaco = " "; // Guarda o elemento separador da impressao
+        No currentNo = root; // Guarda o no corrente da iteração
+        int loopNivel  = nivel; // Guarda o estado do nivel da arvore
+        
+        System.err.println("-----------------------------------------------------------------");
+        System.err.print("ALTURA: " + height(root));
+        System.err.print("\tNIVEL: " + (nivel - 1));
+        System.err.print("\tTAMANHO: " + (nivel - 1));
+        System.err.println("\tNOS_POSSIVEIS: " + ((int) Math.pow(2, nivel) -1));
+                
+        for (int i = 0; i < loopNivel; i++)
+        {                   
+            nivel = height(currentNo); // Calcula a altura do no
+            qtdNosPossiveis = (int) Math.pow(2, nivel) -1; // Calcula a quantidade de nos possiveis            
+            qtdEspacoInicio =  qtdNosPossiveis -1; // Calculo para impressao do espaco
+
+            /*
+            System.out.print("NP " + qtdNosPossiveis);
+            System.out.print("\tEI " + qtdEspacoInicio);
+            System.out.print("\tEE " + qtdEspacoEntre);
+            System.out.print("\tEF " + qtdEspacoInicio);
+            System.out.print("\tN " + nivel);
+            System.out.print("\th " + qtdIteracaoEntre);
+            System.out.println("\tL " + loop);
+            */
+            
+            // Imprime os espaço de inicio
+            for (int j = 0; j < qtdEspacoInicio; j++)
+                System.out.print(espaco);
+            
+            qtdIteracaoEntre = (int) Math.pow(2, i); // Calculo para determinar a quantidade de nos possiveis deste nivel
+                  
+            for (int j = 0; j < qtdIteracaoEntre; j++)
+            {
+                //Imprime o elemento
+                if (currentNo != null)
+                    System.out.print(currentNo.getElement());
+                else
+                    System.out.print(espaco);
+
+                for (int z = 0; z < qtdEspacoEntre; z++)
+                    System.out.print(espaco);
+                    //System.out.print("-");
+            }
+            
+            // Próximo nível
+            System.out.println();
+ 
+            currentNo = currentNo.getFilhoDireito();
+            
+            qtdEspacoEntre = qtdEspacoInicio + 1;
+        }
+        
+        System.err.println("-----------------------------------------------------------------");
+    }
 }

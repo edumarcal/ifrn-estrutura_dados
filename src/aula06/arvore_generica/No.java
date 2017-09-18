@@ -58,11 +58,5 @@ public class No
 
     public void setFB(int FB) {
         this.FB = FB;
-    }    
-/*
-    @Override
-    public String toString() {
-        return element.toString();
     }
- */      
 }

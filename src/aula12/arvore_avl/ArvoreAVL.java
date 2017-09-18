@@ -69,7 +69,7 @@ public class ArvoreAVL extends BinarySearchTree implements IArvoreAVL
     private int calcFB(No no)
     {
         //return height0(no.getFilhoEsquerdo()) - height0(root) + 1;
-        return height0(no.getFilhoEsquerdo()) - height0(no.getFilhoDireito());        
+        return height(no.getFilhoEsquerdo()) - height(no.getFilhoDireito());        
     }
     
     @Override
