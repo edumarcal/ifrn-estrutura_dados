@@ -13,9 +13,9 @@ import static org.junit.Assert.*;
 public class BinarySearchTreeTest
 {
 ///*
-    // Arvove só a direita
+    // STATUS: OK => Arvove só a direita
     @Test
-    public void insert_0_BST()
+    public void insert_BST_0_TreeNodesAllRight()
     {
         BinarySearchTree bst = new BinarySearchTree();
         No root = new No(1);
@@ -33,17 +33,43 @@ public class BinarySearchTreeTest
         //bst.printTree();
         
         bst.insert(root, new No(5));
-        bst.printTree();
+        //bst.printTree();
         
         assertEquals(new Integer(5), bst.size());
      }
 //*/
     
-/*
-    // Arvore cheia
-    // STATUS: OK
+ ///*
+    // STATUS: OK => Arvove só a esquerda
     @Test
-    public void insert_1_BST()
+    public void insert_BST_0_TreeNodesAllLeft()
+    {
+        BinarySearchTree bst = new BinarySearchTree();
+        No root = new No(5);
+        
+        bst.insert(null, root);
+        //bst.printTree();
+        
+        bst.insert(root, new No(4));
+        //bst.printTree();
+        
+        bst.insert(root, new No(3));
+        //bst.printTree();
+        
+        bst.insert(root, new No(2));
+        //bst.printTree();
+        
+        bst.insert(root, new No(1));
+        //bst.printTree();
+        
+        assertEquals(new Integer(5), bst.size());
+     }
+//*/
+    
+///*
+    // STATUS: OK => Arvore cheia
+    @Test
+    public void insert_BST_0_TreeFull()
     {
         BinarySearchTree bst = new BinarySearchTree();
         No root = new No(4);
@@ -67,15 +93,73 @@ public class BinarySearchTreeTest
         //bst.printTree();
         
         bst.insert(root, new No(5));
-        bst.printTree();
+        //bst.printTree();
+        
         //bst.inOrder(root);
         assertEquals(new Integer(7), bst.size());
      }
-*/
+//*/
 
-    /*   
+///*
+    // STATUS: OK => Arvore cheia
+    @Test
+    public void insert_BST_1_TreeFull()
+    {
+        BinarySearchTree bst = new BinarySearchTree();
+        No root = new No(8);
+        
+        bst.insert(null, root);
+        //bst.printTree();
+        
+        bst.insert(root, new No(4));
+        //bst.printTree();
+        
+        bst.insert(root, new No(12));
+        //bst.printTree();
+        
+        bst.insert(root, new No(2));
+        //bst.printTree();
+        
+        bst.insert(root, new No(6));
+        //bst.printTree();
+        
+        bst.insert(root, new No(10));
+        //bst.printTree();
+        
+        bst.insert(root, new No(13));
+        //bst.printTree();
+        
+        bst.insert(root, new No(3));
+        //bst.printTree();
+        
+        bst.insert(root, new No(9));
+        //bst.printTree();
+        
+        bst.insert(root, new No(5));
+        //bst.printTree();
+        
+        bst.insert(root, new No(7));
+        //bst.printTree();
+        
+        bst.insert(root, new No(1));
+        //bst.printTree();
+        
+        bst.insert(root, new No(11));
+        //bst.printTree();
+        
+        bst.insert(root, new No(14));
+        bst.printTree();
+        
+        bst.insert(root, new No(15));
+        //bst.printTree();
+        
+        //bst.inOrder(root);
+       
+        assertEquals(new Integer(15), bst.size());
+     }
+//*/
     
-    
+/*   
        @Test
     public void insertNodesBST()
     {
