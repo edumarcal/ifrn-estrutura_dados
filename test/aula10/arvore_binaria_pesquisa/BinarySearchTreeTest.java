@@ -12,7 +12,8 @@ import static org.junit.Assert.*;
  */
 public class BinarySearchTreeTest
 {
-    
+///*
+    // Arvove só a direita
     @Test
     public void insert_0_BST()
     {
@@ -26,16 +27,53 @@ public class BinarySearchTreeTest
         //bst.printTree();
         
         bst.insert(root, new No(3));
-        bst.printTree();
+        //bst.printTree();
         
         bst.insert(root, new No(4));
         //bst.printTree();
         
         bst.insert(root, new No(5));
-        //bst.printTree();
+        bst.printTree();
+        
         assertEquals(new Integer(5), bst.size());
      }
- /*   
+//*/
+    
+/*
+    // Arvore cheia
+    // STATUS: OK
+    @Test
+    public void insert_1_BST()
+    {
+        BinarySearchTree bst = new BinarySearchTree();
+        No root = new No(4);
+        
+        bst.insert(null, root);
+        //bst.printTree();
+        
+        bst.insert(root, new No(2));
+        //bst.printTree();
+        
+        bst.insert(root, new No(3));
+        //bst.printTree();
+        
+        bst.insert(root, new No(1));
+        //bst.printTree();
+        
+        bst.insert(root, new No(6));
+        //bst.printTree();
+        
+        bst.insert(root, new No(7));
+        //bst.printTree();
+        
+        bst.insert(root, new No(5));
+        bst.printTree();
+        //bst.inOrder(root);
+        assertEquals(new Integer(7), bst.size());
+     }
+*/
+
+    /*   
     
     
        @Test
