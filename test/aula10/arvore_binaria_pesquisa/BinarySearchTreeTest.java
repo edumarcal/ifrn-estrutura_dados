@@ -148,10 +148,10 @@ public class BinarySearchTreeTest
         //bst.printTree();
         
         bst.insert(root, new No(14));
-        bst.printTree();
+        //bst.printTree();
         
         bst.insert(root, new No(15));
-        //bst.printTree();
+        bst.printTree();
         
         //bst.inOrder(root);
        

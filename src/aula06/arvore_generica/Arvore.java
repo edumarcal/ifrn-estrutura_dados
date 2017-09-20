@@ -89,8 +89,7 @@ public class Arvore extends Travessia implements IArvore
         int qtdEspacoEntre = 0; // Guarda o valor que representa a sequencia de impressao do espaco entre os nos
         int qtdIteracaoEntre; // Guarda o valor que representa
         String espaco = " "; // Guarda o elemento separador da impressao
-        No currentNo = root; // Guarda o no corrente da iteração
-        No current = root; // Guarda o no anterior da iteração
+        No current; // Guarda o no anterior da iteração
         int loopNivel  = nivel; // Guarda o estado do nivel da arvore
         
         // Rodapé da impressão
@@ -102,7 +101,8 @@ public class Arvore extends Travessia implements IArvore
 
         for (int i = 0; i < loopNivel; i++)
         {                   
-            nivel = height(currentNo); // Calcula a altura do no
+            //nivel = height(currentNo); // Calcula a altura do no
+            //nivel--; // Calcula a altura do no
             qtdNosPossiveis = (int) Math.pow(2, nivel) -1; // Calcula a quantidade de nos possiveis            
             qtdEspacoInicio =  qtdNosPossiveis -1; // Calculo para impressao do espaco
             
@@ -111,25 +111,14 @@ public class Arvore extends Travessia implements IArvore
             
             qtdIteracaoEntre = (int) Math.pow(2, i); // Calculo para determinar a quantidade de nos possiveis deste nivel
             
-            //if (i >= 2)
-            //{
-                System.err.println(" ");
-                System.err.print("Ciclo: " + (i + 1) + "\n");
-            //}
+            //System.err.println(" ");
+            //System.err.print("Ciclo: " + (i + 1) + "\n");
             
             for (int j = 0; j < qtdIteracaoEntre; j++)
             {
-                //current = getElementByLevel(i, j, qtdIteracaoEntre);
-                //current = null;
-                
-                //System.err.print(getElementByLevel(i, j));
-                
+                            
                 current = getElementByLevel(i, j);
-                
-                //System.err.print(" = ");
-                //System.err.print(current == null ? current : current.getElement());
-                //System.err.print(" ");
-                
+                    
                 // Imprime o raiz
                 if (i == 0)
                 {
@@ -155,19 +144,13 @@ public class Arvore extends Travessia implements IArvore
             // Próximo nível
             System.out.println();
     
-            // Atualiza a referencia do proximo elemento
-            //if (current != null)
-            //    currentNo = current;
-            //else
-                currentNo = currentNo.getFilhoEsquerdo() == null ?
-                        currentNo.getFilhoDireito() :
-                        currentNo.getFilhoEsquerdo();
-            //*/
             // Atualiza o valor de espacamento entre os nos
             qtdEspacoEntre = qtdEspacoInicio + 1;
+            
+            nivel--; // Calcula a altura do no
         }
         
-        System.err.println("\n-----------------------------------------------------------------");
+        System.err.println("-----------------------------------------------------------------");
     }
     
     
@@ -185,7 +168,7 @@ public class Arvore extends Travessia implements IArvore
         }
         return matriz;
     }
-       
+    
     private No getElementByLevel(int level, int sentido)
     {
         No retorno = root;
@@ -194,198 +177,26 @@ public class Arvore extends Travessia implements IArvore
         
         for (int i = 0; i < level; i++)
         {
-            System.err.print(matriz[sentido][i]);
+            //System.err.print(matriz[sentido][i]);
             
             if(matriz[sentido][i])
             {
                 if (retorno == null)
                     return null;
                 else
-                retorno = retorno.getFilhoDireito();
+                    retorno = retorno.getFilhoDireito();
             }
             else
             {
                 if (retorno == null)
                     return null;
                 else
-                retorno = retorno.getFilhoEsquerdo();
+                    retorno = retorno.getFilhoEsquerdo();
             }
 
-            System.err.print(" ");
+            //System.err.print(" ");
         }
-        System.err.println();
+        //System.err.println();
         return retorno;
-    }
-    
-    private No getElementByLevel(int level, int sentido, int iteracao)
-    {
-        if (level != 0)
-            System.err.print("|"+sentido+ " N(" + level + ")| ");
-        
-        No retorno = root;
-        
-        if (level != 0)
-        {
-            switch (level) {
-                case 1:
-                    if (sentido == 0)
-                    {
-                        retorno = retorno == null ?
-                                null :
-                                retorno.getFilhoEsquerdo();
-                    }
-                    else
-                    {
-                        retorno = retorno == null ?
-                                null :
-                                retorno.getFilhoDireito();
-                    }   break;
-                case 2:
-                    if (sentido < iteracao / 2)
-                    {
-                        System.err.print("L");
-                        if (sentido % 2 == 0)
-                        {
-                            System.err.print("E ");
-                            for (int i = 0; i < level; i++)
-                            {
-                                retorno = retorno == null ?
-                                        null :
-                                        retorno.getFilhoEsquerdo();
-                            }
-                            
-                        }
-                        else
-                        {
-                            System.err.print("D ");
-                            for (int i = 0; i < level-1; i++)
-                            {
-                                retorno = retorno == null ?
-                                        null :
-                                        retorno.getFilhoEsquerdo();
-                            }
-                            
-                            // Pega o no direito da sub-arvore esquerda
-                            retorno = retorno == null ?
-                                    null :
-                                    retorno.getFilhoDireito();
-                        }
-                    }
-                    else
-                    {
-                        //System.err.println();
-                        System.err.print("R");
-                        if (sentido % 2 == 0)
-                        {
-                            System.err.print("E ");
-                            for (int i = 0; i < level -1; i++)
-                            {
-                                retorno = retorno == null ?
-                                        null :
-                                        retorno.getFilhoDireito();
-                            }
-                            
-                            // Pega o no esquerdo da sub-arvore direita
-                            retorno = retorno == null ?
-                                    null :
-                                    retorno.getFilhoEsquerdo();
-                        }
-                        else
-                        {
-                            System.err.print("D ");
-                            for (int i = 0; i < level; i++)
-                            {
-                                retorno = retorno == null ?
-                                        null :
-                                        retorno.getFilhoDireito();
-                            }
-                        }
-                    }   break;
-                default:
-                    if (sentido < iteracao / 2)
-                    {
-                        int upTree = 0;
-                        if (sentido > 1)
-                        {
-                            upTree++;
-                        }
-                        // Sub-Arvore Esquerda
-                        System.err.println("\tS="+sentido+" I="+iteracao);
-                        System.err.print("L");
-                        if (sentido % 2 == 0)
-                        {
-                            System.err.print("E ");
-                            for (int i = 0; i < level; i++)
-                            {
-                                if(sentido == 2)
-                                {
-                                    retorno = retorno == null ?
-                                        null :
-                                        retorno.getFilhoDireito();
-                                }
-                                else
-                                {
-                                    retorno = retorno == null ?
-                                        null :
-                                        retorno.getFilhoEsquerdo();
-                                }
-                            }
-                        }
-                        else
-                        {
-                            System.err.print("D ");
-                            for (int i = 0; i < level-1; i++)
-                            {
-                                retorno = retorno == null ?
-                                        null :
-                                        retorno.getFilhoEsquerdo();
-                            }
-                            
-                            // Pega o no direito da sub-arvore esquerda
-                            retorno = retorno == null ?
-                                    null :
-                                    retorno.getFilhoDireito();
-                        }
-                    }
-                    else
-                    {
-                        // Sub-Arvore Direita
-                        //System.err.println();
-                        System.err.print("R");
-                        if (sentido % 2 == 0)
-                        {
-                            System.err.print("E ");
-                            for (int i = 0; i < level -1; i++)
-                            {
-                                retorno = retorno == null ?
-                                        null :
-                                        retorno.getFilhoDireito();
-                            }
-                            
-                            // Pega o no esquerdo da sub-arvore direita
-                            retorno = retorno == null ?
-                                    null :
-                                    retorno.getFilhoEsquerdo();
-                        }
-                        else
-                        {
-                            System.err.print("D ");
-                            for (int i = 0; i < level; i++)
-                            {
-                                System.err.print(level);
-                                System.err.print("\t");
-                                System.err.println(sentido);
-                                                               
-                                retorno = retorno == null ?
-                                        null :
-                                        retorno.getPai();
-                            }
-                        }
-                    }   break;
-            }
-            
-        }
-        return retorno;
-    }
-    
+    }  
 }
