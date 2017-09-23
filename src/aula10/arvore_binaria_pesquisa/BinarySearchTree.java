@@ -29,7 +29,7 @@ public class BinarySearchTree extends Arvore implements IBinarySearchTree {
         if (root == null)
         {
             root = element;
-            root.setPai(root);
+            //root.setPai(root);
         }
         else
         {
@@ -106,7 +106,7 @@ public class BinarySearchTree extends Arvore implements IBinarySearchTree {
             if (hasLeft(noDrop) && !hasright(noDrop))
             {
                 //System.out.println("Caso 2L");
-                if (noDrop.getPai().equals(root) && size() == 2) // remove root
+                if (noDrop.equals(root) && size() == 2) // remove root
                 {
                     noDrop.setPai(root);
                     root = noDrop.getFilhoEsquerdo();

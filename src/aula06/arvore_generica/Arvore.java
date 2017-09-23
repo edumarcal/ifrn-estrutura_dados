@@ -80,6 +80,14 @@ public class Arvore extends Travessia implements IArvore
         return no;
     }    
 
+    public void printLabelTree(String step)
+    {
+        System.out.println("----------------------------------------");
+        System.out.println("Step ( "+ step + " )");
+        //printTree();
+        //System.out.println("----------------------------------------");
+    }
+    
     @Override
     public void printTree()
     {     
@@ -93,11 +101,11 @@ public class Arvore extends Travessia implements IArvore
         int loopNivel  = nivel; // Guarda o estado do nivel da arvore
         
         // Rodapé da impressão
-        System.err.println("-----------------------------------------------------------------");
-        System.err.print("ALTURA: " + height(root));
-        System.err.print("\tNIVEL: " + (nivel - 1));
-        System.err.print("\tTAMANHO: " + size());
-        System.err.println("\tNOS_POSSIVEIS: " + ((int) Math.pow(2, nivel) -1));
+        //System.err.println("-----------------------------------------------------------------");
+        //System.err.print("ALTURA: " + height(root));
+        //System.err.print("\tNIVEL: " + (nivel - 1));
+        //System.err.print("\tTAMANHO: " + size());
+        //System.err.println("\tNOS_POSSIVEIS: " + ((int) Math.pow(2, nivel) -1));
 
         for (int i = 0; i < loopNivel; i++)
         {                   
@@ -150,7 +158,8 @@ public class Arvore extends Travessia implements IArvore
             nivel--; // Calcula a altura do no
         }
         
-        System.err.println("-----------------------------------------------------------------");
+        //System.err.println("-----------------------------------------------------------------");
+        System.out.println();
     }
     
     
