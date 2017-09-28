@@ -260,15 +260,74 @@ public class ArvoreAVLTest {
    public void remove_AVL_0()
    {
        ArvoreAVL avl = new ArvoreAVL();
-       No root = new No(1);
+       No root = new No(8);
+       No rem0 = new No(22);
+       No rem1 = new No(31);
+       No rem2 = new No(12);
+       No rem3 = new No(7);
+       No rem4 = new No(20);
        
        avl.printLabelTree("1");
        avl.insert(root);
        
-       avl.printLabelTree("8");
+       avl.printLabelTree("2");
+       avl.insert(new No(6));
+       
+       avl.printLabelTree("3");
+       avl.insert(rem4);
+       
+       avl.printLabelTree("4");
        avl.insert(new No(2));
        
-       assertEquals(new Integer(8), avl.size());
+       avl.printLabelTree("5");
+       avl.insert(new No(11));
+       
+       avl.printLabelTree("6");
+       avl.insert(rem3);
+       
+       avl.printLabelTree("7");
+       avl.insert(new No(29));
+       
+       avl.printLabelTree("8");
+       avl.insert(new No(3));
+       
+       avl.printLabelTree("9");
+       avl.insert(new No(10));
+       
+       avl.printLabelTree("10");
+       avl.insert(rem2);
+       
+       avl.printLabelTree("11");
+       avl.insert(new No(24));
+       
+       avl.printLabelTree("12");
+       avl.insert(new No(32));
+       
+       avl.printLabelTree("13");
+       avl.insert(rem0);
+       
+       avl.printLabelTree("14");
+       avl.insert(new No(9));
+       
+       avl.printLabelTree("15");
+       avl.insert(rem1);
+       
+       assertEquals(new Integer(15), avl.size());
+       
+       avl.printLabelTree("Remoção: 1");
+       avl.remove(rem0);
+       
+       avl.printLabelTree("Remoção: 2");
+       avl.remove(rem1);
+       
+       avl.printLabelTree("Remoção: 3");
+       avl.remove(rem2);
+       
+       avl.printLabelTree("Remoção: 4");
+       avl.remove(rem3);
+       
+       avl.printLabelTree("Remoção: 5");
+       avl.remove(rem4);
        
        avl.printLabelTree("Final");
        avl.printTree();

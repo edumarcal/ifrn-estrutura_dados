@@ -93,19 +93,19 @@ public class ArvoreAVL extends BinarySearchTree implements IArvoreAVL
         // Atualiza o fator de balanceamento
         no.setFB(calcFB(no));
         System.out.println("No [ " + no.getElement() + " ] => FB = " + no.getFB());
-
-        // Critério de parada
-        if(hasParent(no))
+        
+        if(operacao)
         {
-            parent(no).setFB(calcFB(parent(no)));
-            if(parent(no).getFB() == 0)
-                return;
-        }
+            // Critério de parada
+            if(hasParent(no))
+            {
+                parent(no).setFB(calcFB(parent(no)));
+                if(parent(no).getFB() == 0)
+                    return;
+            }
 
-        if(no.getFB() == 2)
-        {
-            //if(hasright(no))
-            //{
+            if(no.getFB() == 2)
+            {
                 if(leftChild(no).getFB() == -1)
                 {
                     System.out.println("Tipo de rotação: RDD [ " + leftChild(no).getElement() + " ]");
@@ -118,18 +118,9 @@ public class ArvoreAVL extends BinarySearchTree implements IArvoreAVL
                     rotacaoSimplesDireita(no);
                     printTree();
                 }
-            //}
-            //else
-            //{
-            //    System.out.println("Tipo de rotação: RDS [ " + no.getElement() + " ]");
-            //    rotacaoSimplesDireita(no);
-            //    printTree();
-            //}
-        }
-        else if(no.getFB() == -2)
-        {
-            //if(hasLeft(no))
-            //{
+            }
+            else if(no.getFB() == -2)
+            {
                 if(rightChild(no).getFB() == 1)
                 {
                     System.out.println("Tipo de rotação: RDE [ " + rightChild(no).getElement() + " ]");
@@ -142,24 +133,62 @@ public class ArvoreAVL extends BinarySearchTree implements IArvoreAVL
                     rotacaoSimplesEsquerda(no);
                     printTree();
                 }
-            //}
-            //else
-            //{
-            //    System.out.println("Tipo de rotação: RES [ " + no.getElement() + " ]");
-            //    rotacaoSimplesEsquerda(no);
-            //    printTree();
-            //}
-        }
+            }
 
-        if(hasParent(no))
-        {
-            //System.err.println(no.getElement());
-            atualizarFB(parent(no), operacao);
+            if(hasParent(no))
+            {
+                //System.err.println(no.getElement());
+                atualizarFB(parent(no), operacao);
+            }
+            else
+            {
+                //System.err.println("- "+no.getElement());
+                return;
+            }
         }
         else
         {
-            //System.err.println("- "+no.getElement());
-            return;
+            if(no.getFB() == 2)
+            {
+                if(leftChild(no).getFB() == -1)
+                {
+                    System.out.println("Tipo de rotação: RDD [ " + leftChild(no).getElement() + " ]");
+                    rotacaoDuplaDireita(no);
+                    printTree();
+                }
+                else
+                {
+                    System.out.println("Tipo de rotação: RDS [ " + no.getElement() + " ]");
+                    rotacaoSimplesDireita(no);
+                    printTree();
+                }
+            }
+            else if(no.getFB() == -2)
+            {
+                if(rightChild(no).getFB() == 1)
+                {
+                    System.out.println("Tipo de rotação: RDE [ " + rightChild(no).getElement() + " ]");
+                    rotacaoDuplaEsquerda(no);
+                    printTree();
+                }
+                else
+                {
+                    System.out.println("Tipo de rotação: RES [ " + no.getElement() + " ]");
+                    rotacaoSimplesEsquerda(no);
+                    printTree();
+                }
+            }
+
+            if(hasParent(no))
+            {
+                //System.err.println(no.getElement());
+                atualizarFB(parent(no), operacao);
+            }
+            else
+            {
+                //System.err.println("- "+no.getElement());
+                return;
+            }
         }
     }
 
@@ -169,24 +198,26 @@ public class ArvoreAVL extends BinarySearchTree implements IArvoreAVL
     }
     
     @Override
-    public void insert(No no) {
+    public void insert(No no)
+    {
         super.insert(root, no);
         printTree();
         atualizarFB(no, true);
     }
 
     @Override
-    public No search(No no) {
+    public No search(No no)
+    {
         return super.search(root, no);
     }
 
     @Override
-    public No remove(No element) {
+    public No remove(No element)
+    {
         No no = super.remove(element);
-        
-        if (no != null)
-            atualizarFB(no, false);
-        
+        printTree();
+        //System.err.println("PAI = "+parent(no).getElement() + "\tFB = "+ calcFB(no.getPai()));
+        atualizarFB(parent(no), false);
         return no;
     } 
 
@@ -194,110 +225,5 @@ public class ArvoreAVL extends BinarySearchTree implements IArvoreAVL
     public boolean hasParent(No no)
     {
         return parent(no) != null;
-    }
-    
-    private void balance(No no)
-    {
-        // operacao = TRUE => INSERT | FALSE => REMOVE
-        if (hasParent(no))
-        {
-            // sub-arvore esquerda
-            if(hasLeft(parent(no)))
-            {
-                if(parent(no).getFilhoEsquerdo().equals(no))
-                {
-                    if(parent(no).getFB() >= 2)
-                    {
-                        if(hasright(no))
-                        {
-                            if(rightChild(no).getFB() == -1)
-                            {
-                                System.out.println("Tipo de rotação: RDD [ " + parent(no).getElement() + " ]");
-                                rotacaoDuplaDireita(parent(no));
-                            }
-                        }
-                        else
-                        {
-                            System.out.println("Tipo de rotação: RDS [ " + parent(no).getElement() + " ]");
-                            rotacaoSimplesEsquerda(parent(no));
-                        }
-                    }
-                }
-            }
-            // sub-arvore direita
-            else if(hasright(parent(no)))
-            {
-                if(parent(no).getFilhoDireito().equals(no))
-                {
-                    if(parent(no).getFB() <= -2)
-                    {
-                        if(hasLeft(no))
-                        {
-                            if(leftChild(no).getFB() == -1)
-                            {
-                                System.out.println("Tipo de rotação: RDE [ " + parent(no).getElement() + " ]");
-                                rotacaoDuplaEsquerda(parent(no));
-                            }
-                        }
-                        else
-                        {
-                            System.out.println("No [ " + parent(no).getElement() + " ] => FB = " + parent(no).getFB());
-                            System.out.println("Tipo de rotação: RES [ " + parent(no).getElement() + " ]");
-                            rotacaoSimplesEsquerda(parent(no));
-                            printTree();
-                        }
-                    }
-                }
-            }
-        }
-    }
-
-
-public void atualizarFBXXX(No no, boolean operacao)
-    {
-        // operacao = TRUE => INSERT | FALSE => REMOVE
-        if(operacao)
-        {
-            if (hasParent(no))
-            {
-                System.out.println("No [ " + no.getElement() + " ] => FB = " + no.getFB());
-                // sub-arvore esquerda
-                if(hasLeft(parent(no)))
-                {
-                    if(parent(no).getFilhoEsquerdo().equals(no))
-                    {
-                        parent(no).setFB(parent(no).getFB() + 1); // Add Left Sum 1
-                        if(parent(no).getFB() >= 2)
-                        {
-                            balance(no);
-                            return;
-                        }
-
-                        atualizarFB(parent(no), operacao);
-                    }
-                }
-                // sub-arvore direita
-                else if(hasright(parent(no)))
-                {                    
-                    if(parent(no).getFilhoDireito().equals(no))
-                    {
-                        parent(no).setFB(parent(no).getFB() -1); // Add Left Sub 1                     
-                        
-                        if(parent(no).getFB() <= -2)
-                        {
-                            balance(no);
-                            return;
-                        }
-                        atualizarFB(parent(no), operacao);
-                    }
-                }
-                
-            }
-        }
-        else // Case remoção
-        {
-        }
-        
-        //System.out.println("No [ " + no.getElement() + " ] => FB = " + no.getFB());
-    }    
+    }   
 }

@@ -97,7 +97,7 @@ public class BinarySearchTree extends Arvore implements IBinarySearchTree {
                     noDrop.getPai().setFilhoDireito(null);
                 }
             }
-            noDrop.setPai(null);
+            //noDrop.setPai(null);
             return noDrop;
         }
         else
