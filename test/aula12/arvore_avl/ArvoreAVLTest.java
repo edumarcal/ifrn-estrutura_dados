@@ -12,8 +12,8 @@ import static org.junit.Assert.*;
  */
 public class ArvoreAVLTest {
 
-///*
-    // STATUS: OK => Inserindo elementos em ordem crescente (Rotação a esquerda)
+/*
+   // STATUS: OK => Inserindo elementos em ordem crescente (Rotação simples a esquerda)
    @Test
    public void insert_AVL_RotationLeft_0()
    {
@@ -29,17 +29,25 @@ public class ArvoreAVLTest {
        avl.printLabelTree("3");
        avl.insert(new No(3));
        
-       assertEquals(new Integer(3), avl.size());
+       avl.printLabelTree("4");
+       avl.insert(new No(4));
+       
+       avl.printLabelTree("5");
+       avl.insert(new No(5));
+       
+       avl.printLabelTree("6");
+       avl.insert(new No(6));
+       
+       assertEquals(new Integer(6), avl.size());
        
        avl.printLabelTree("Final");
        avl.printTree();
-       //avl.preOrder(root);
-   }
-//*/
-   
 
+   }
+*/
+   
 /*
-    // STATUS: OK => Inserindo elementos em ordem crescente (Rotação a esquerda)
+   // STATUS: OK => Inserindo elementos em ordem crescente (Rotação simples a esquerda)
    @Test
    public void insert_AVL_RotationLeft_1()
    {
@@ -74,7 +82,111 @@ public class ArvoreAVLTest {
        
        avl.printLabelTree("Final");
        avl.printTree();
-       //avl.preOrder(root);
    }
-*/   
+*/
+
+/*
+   // STATUS: OK => Validando o criterio de parada
+   @Test
+   public void insert_AVL_StopUpdateFB()
+   {
+       ArvoreAVL avl = new ArvoreAVL();
+       No root = new No(10);
+       
+       avl.printLabelTree("1");
+       avl.insert(root);
+       
+       avl.printLabelTree("2");
+       avl.insert(new No(9));
+       
+       avl.printLabelTree("3");
+       avl.insert(new No(15));
+       
+       avl.printLabelTree("4");
+       avl.insert(new No(16));
+       
+       avl.printLabelTree("5");
+       avl.insert(new No(12));
+       
+       assertEquals(new Integer(5), avl.size());
+       assertEquals(root.getFilhoDireito().getElement(), 15);
+       
+       avl.printLabelTree("Final");
+       avl.printTree();
+   }
+*/
+
+///*
+   // STATUS: FAILL => Inserindo elementos em ordem decrescente (Rotação simples a direita)
+   @Test
+   public void insert_AVL_RotationRight_0()
+   {
+       ArvoreAVL avl = new ArvoreAVL();
+       No root = new No(6);
+       
+       avl.printLabelTree("1");
+       avl.insert(root);
+       
+       avl.printLabelTree("2");
+       avl.insert(new No(5));
+       
+       avl.printLabelTree("3");
+       avl.insert(new No(4));
+       
+       avl.printLabelTree("4");
+       avl.insert(new No(3));
+       
+       avl.printLabelTree("5");
+       avl.insert(new No(2));
+       
+       avl.printLabelTree("6");
+       avl.insert(new No(1));
+       
+       assertEquals(new Integer(6), avl.size());
+       
+       avl.printLabelTree("Final");
+       avl.printTree();
+
+   }
+//*/
+   
+/*
+   // STATUS: FAILL => Inserindo elementos em ordem decrescente (Rotação simples a direita)
+   @Test
+   public void insert_AVL_RotationLeft_1()
+   {
+       ArvoreAVL avl = new ArvoreAVL();
+       No root = new No(1);
+       
+       avl.printLabelTree("1");
+       avl.insert(root);
+       
+       avl.printLabelTree("2");
+       avl.insert(new No(2));
+       
+       avl.printLabelTree("3");
+       avl.insert(new No(3));
+       
+       avl.printLabelTree("4");
+       avl.insert(new No(4));
+       
+       avl.printLabelTree("5");
+       avl.insert(new No(5));
+       
+       avl.printLabelTree("6");
+       avl.insert(new No(6));
+       
+       avl.printLabelTree("7");
+       avl.insert(new No(7));
+       
+       avl.printLabelTree("8");
+       avl.insert(new No(8));
+       
+       assertEquals(new Integer(8), avl.size());
+       
+       avl.printLabelTree("Final");
+       avl.printTree();
+   }
+//*/
+    
 }
