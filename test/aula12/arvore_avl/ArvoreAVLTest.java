@@ -116,8 +116,8 @@ public class ArvoreAVLTest {
    }
 */
 
-///*
-   // STATUS: FAILL => Inserindo elementos em ordem decrescente (Rotação simples a direita)
+/*
+   // STATUS: OK => Inserindo elementos em ordem decrescente (Rotação simples a direita)
    @Test
    public void insert_AVL_RotationRight_0()
    {
@@ -148,12 +148,12 @@ public class ArvoreAVLTest {
        avl.printTree();
 
    }
-//*/
+*/
    
-/*
-   // STATUS: FAILL => Inserindo elementos em ordem decrescente (Rotação simples a direita)
+///*
+   // STATUS: OK => Inserindo elementos em ordem decrescente (Rotação simples a direita)
    @Test
-   public void insert_AVL_RotationLeft_1()
+   public void insert_AVL_RotationRight_1()
    {
        ArvoreAVL avl = new ArvoreAVL();
        No root = new No(1);
@@ -187,6 +187,5 @@ public class ArvoreAVLTest {
        avl.printLabelTree("Final");
        avl.printTree();
    }
-//*/
-    
+//*/  
 }

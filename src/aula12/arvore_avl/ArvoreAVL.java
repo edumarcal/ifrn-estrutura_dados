@@ -43,34 +43,36 @@ public class ArvoreAVL extends BinarySearchTree implements IArvoreAVL
     @Override
     public void rotacaoSimplesDireita(No no)
     {
-        System.err.println(no.getElement());
-        No element = no.getFilhoEsquerdo();
-        element.setPai(no.getPai());
-        if (!hasParent(no))
-        {
-            if (no.getPai().getFilhoEsquerdo() == no)
-            {
-                no.getPai().setFilhoEsquerdo(element);
-            }
-            else
-            {
-                no.getPai().setFilhoDireito(element);
-            }
-        }
+        //System.err.println(no.getElement());
         
-        no.setPai(element);
+        No element = no.getFilhoEsquerdo();
+        no.setFilhoEsquerdo(element.getFilhoDireito());
         if (element.getFilhoDireito() != null)
         {
             element.getFilhoDireito().setPai(no);
-            element.setFilhoDireito(no);
+        }
+        
+        element.setPai(no.getPai());
+        if (!hasParent(no))
+        {
+            root = element;
+        }
+        else if (no == no.getPai().getFilhoDireito())
+        {
+            no.getPai().setFilhoDireito(element);
         }
         else
         {
-            element.setFilhoDireito(no);
-            element.getFilhoDireito().setPai(element);
-            no.setFilhoEsquerdo(null);
+            no.getPai().setFilhoEsquerdo(element);
         }
-        //root = element;
+        
+        element.setFilhoDireito(no);
+        no.setPai(element);
+        
+        //System.err.print("E "+element.getElement());
+        //System.err.print("\tEL "+(hasLeft(element) ? element.getFilhoEsquerdo().getElement(): "nulo"));
+        //System.err.print("\tER "+(hasright(element) ? element.getFilhoDireito().getElement(): "nulo"));
+        //System.err.print("\tEP "+(hasParent(element) ? element.getPai().getElement(): "nulo")+"\n");
     }
     
     @Override
