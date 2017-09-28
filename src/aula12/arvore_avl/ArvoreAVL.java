@@ -44,7 +44,6 @@ public class ArvoreAVL extends BinarySearchTree implements IArvoreAVL
     public void rotacaoSimplesDireita(No no)
     {
         //System.err.println(no.getElement());
-        
         No element = no.getFilhoEsquerdo();
         no.setFilhoEsquerdo(element.getFilhoDireito());
         if (element.getFilhoDireito() != null)
@@ -68,59 +67,50 @@ public class ArvoreAVL extends BinarySearchTree implements IArvoreAVL
         
         element.setFilhoDireito(no);
         no.setPai(element);
-        
-        //System.err.print("E "+element.getElement());
-        //System.err.print("\tEL "+(hasLeft(element) ? element.getFilhoEsquerdo().getElement(): "nulo"));
-        //System.err.print("\tER "+(hasright(element) ? element.getFilhoDireito().getElement(): "nulo"));
-        //System.err.print("\tEP "+(hasParent(element) ? element.getPai().getElement(): "nulo")+"\n");
     }
     
     @Override
-    public void rotacaoDuplaEsquerda(No no) {
-        rotacaoSimplesDireita(no);
-        rotacaoSimplesEsquerda(no);
+    public void rotacaoDuplaEsquerda(No no)
+    {
+        //System.err.print("D = "+rightChild(no).getElement());
+        rotacaoSimplesDireita(rightChild(no));
+        //System.err.print("E = "+parent(no).getPai().getElement());
+        rotacaoSimplesEsquerda(parent(no).getPai());
     }
 
     @Override
-    public void rotacaoDuplaDireita(No no) {
-        rotacaoSimplesEsquerda(no);
+    public void rotacaoDuplaDireita(No no)
+    {
+        //System.err.print("E = "+leftChild(no).getElement());
+        rotacaoSimplesEsquerda(leftChild(no));
+        //System.err.print("D = "+no.getElement());
         rotacaoSimplesDireita(no);
     }
        
     @Override
     public void atualizarFB(No no, boolean operacao)
     {
-        // operacao = TRUE => INSERT | FALSE => REMOVE
-        if(operacao)
+        // Atualiza o fator de balanceamento
+        no.setFB(calcFB(no));
+        System.out.println("No [ " + no.getElement() + " ] => FB = " + no.getFB());
+
+        // Critério de parada
+        if(hasParent(no))
         {
-            // Atualiza o fator de balanceamento
-            no.setFB(calcFB(no));
-            System.out.println("No [ " + no.getElement() + " ] => FB = " + no.getFB());
-            
-            // Critério de parada
-            if(hasParent(no))
-            {
-                parent(no).setFB(calcFB(parent(no)));
-                if(parent(no).getFB() == 0)
-                    return;
-            }
-            
-            if(no.getFB() == 2)
-            {
-                if(hasright(no))
+            parent(no).setFB(calcFB(parent(no)));
+            if(parent(no).getFB() == 0)
+                return;
+        }
+
+        if(no.getFB() == 2)
+        {
+            //if(hasright(no))
+            //{
+                if(leftChild(no).getFB() == -1)
                 {
-                    if(rightChild(no).getFB() == -1)
-                    {
-                        System.out.println("Tipo de rotação: RDD [ " + no.getElement() + " ]");
-                        rotacaoDuplaDireita(no);
-                        printTree();
-                    }
-                    else
-                    {
-                        System.out.println("Tipo de rotação: RDS [ " + no.getElement() + " ]");
-                        rotacaoSimplesDireita(no);
-                        printTree();
-                    }
+                    System.out.println("Tipo de rotação: RDD [ " + leftChild(no).getElement() + " ]");
+                    rotacaoDuplaDireita(no);
+                    printTree();
                 }
                 else
                 {
@@ -128,23 +118,23 @@ public class ArvoreAVL extends BinarySearchTree implements IArvoreAVL
                     rotacaoSimplesDireita(no);
                     printTree();
                 }
-            }
-            else if(no.getFB() == -2)
-            {
-                if(hasLeft(no))
+            //}
+            //else
+            //{
+            //    System.out.println("Tipo de rotação: RDS [ " + no.getElement() + " ]");
+            //    rotacaoSimplesDireita(no);
+            //    printTree();
+            //}
+        }
+        else if(no.getFB() == -2)
+        {
+            //if(hasLeft(no))
+            //{
+                if(rightChild(no).getFB() == 1)
                 {
-                    if(leftChild(no).getFB() == -1)
-                    {
-                        System.out.println("Tipo de rotação: RDE [ " + no.getElement() + " ]");
-                        rotacaoDuplaEsquerda(no);
-                        printTree();
-                    }
-                    else
-                    {
-                        System.out.println("Tipo de rotação: RES [ " + no.getElement() + " ]");
-                        rotacaoSimplesEsquerda(no);
-                        printTree();
-                    }
+                    System.out.println("Tipo de rotação: RDE [ " + rightChild(no).getElement() + " ]");
+                    rotacaoDuplaEsquerda(no);
+                    printTree();
                 }
                 else
                 {
@@ -152,22 +142,24 @@ public class ArvoreAVL extends BinarySearchTree implements IArvoreAVL
                     rotacaoSimplesEsquerda(no);
                     printTree();
                 }
-            }
-            
-            if(hasParent(no))
-            {
-                //System.err.println(no.getElement());
-                atualizarFB(parent(no), operacao);
-            }
-            else
-            {
-                //System.err.println("- "+no.getElement());
-                return;
-            }
+            //}
+            //else
+            //{
+            //    System.out.println("Tipo de rotação: RES [ " + no.getElement() + " ]");
+            //    rotacaoSimplesEsquerda(no);
+            //    printTree();
+            //}
         }
-        else // Case remoção
+
+        if(hasParent(no))
         {
-  
+            //System.err.println(no.getElement());
+            atualizarFB(parent(no), operacao);
+        }
+        else
+        {
+            //System.err.println("- "+no.getElement());
+            return;
         }
     }
 
